@@ -2,7 +2,6 @@
 
 namespace ConsoleApp4.Models
 {
-    [DataContract(Name = "animal")]
     public class AnimalDto
     {
         public AnimalDto(string name)
@@ -10,6 +9,6 @@ namespace ConsoleApp4.Models
             Name = name;
         }
 
-        [DataMember(Name = "name")] public string Name { get; set; }
+        public string Name { get; set; }
     }
 }

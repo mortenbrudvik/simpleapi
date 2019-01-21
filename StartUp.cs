@@ -1,5 +1,7 @@
-﻿using System.Web.Http;
+﻿using System.Net.Http.Formatting;
+using System.Web.Http;
 using System.Web.Http.Cors;
+using Newtonsoft.Json.Serialization;
 using Owin;
 
 namespace ConsoleApp4
@@ -15,7 +17,11 @@ namespace ConsoleApp4
             var attr = new EnableCorsAttribute("*", "*", "*");
             config.EnableCors(attr);
 
-            config.Routes.MapHttpRoute("SimpleApi", "simpleapi/{controller}/{id}", new {id = RouteParameter.Optional});
+            config.Formatters.Clear();
+            config.Formatters.Add(new JsonMediaTypeFormatter());
+            config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+
+            config.Routes.MapHttpRoute("SimpleApi", "api/{controller}/{id}", new {id = RouteParameter.Optional});
             app.UseWebApi(config);
         }
     }

@@ -15,6 +15,7 @@ namespace ConsoleApp4
 
         public void Start()
         {
+            Console.Out.WriteLine($"Starting Api Server: {_baseAddress}");
             _server = WebApp.Start<StartUp>(_baseAddress);
         }
 

@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
+using ConsoleApp4.Models;
 
-namespace ConsoleApp4
+namespace ConsoleApp4.Controllers
 {
     public class AnimalsController : ApiController
     {
