@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiService.cs" />
+    <Compile Include="Middleware\GlobalExceptionHandler.cs" />
     <Compile Include="Middleware\RequestLoggingMiddelware.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -59,6 +60,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="FluentValidation">
+      <Version>8.1.2</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.AspNet.WebApi.Cors">
       <Version>5.2.7</Version>
     </PackageReference>

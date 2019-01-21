@@ -1,6 +1,8 @@
 ﻿using System.Net.Http.Formatting;
+using System.Security.Permissions;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using System.Web.Http.ExceptionHandling;
 using Newtonsoft.Json.Serialization;
 using Owin;
 using Unity;
@@ -35,10 +37,11 @@ namespace WebApiServerConsole
             // Routes setup
             config.MapHttpAttributeRoutes();
             config.Routes.MapHttpRoute("SimpleApi", "api/{controller}/{id}", new {id = RouteParameter.Optional});
-
+            
             // Middleware
             app.Use<RequestLoggingMiddleware>(loggerService);
-
+            config.Services.Replace(typeof(IExceptionHandler), new GlobalExceptionHandler(loggerService)); // Catches unhandled exceptions.
+            
             app.UseWebApi(config);
         }
     }
