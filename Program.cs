@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ConsoleApp4
+namespace WebApiServerConsole
 {
     class Program
     {

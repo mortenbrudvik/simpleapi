@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Owin.Hosting;
 
-namespace ConsoleApp4
+namespace WebApiServerConsole
 {
     public class ApiService
     {

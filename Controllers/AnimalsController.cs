@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
-using ConsoleApp4.Models;
+using WebApiServerConsole.Models;
 
-namespace ConsoleApp4.Controllers
+namespace WebApiServerConsole.Controllers
 {
     public class AnimalsController : ApiController
     {
-        public IEnumerable<AnimalDto> Get()
+        public IHttpActionResult Get()
         {
-            return new List<AnimalDto>(){new AnimalDto( "cat"), new AnimalDto("dog")};
+            var animals = new List<Animal> {new Animal("cat"), new Animal("dog")};
+            return Ok(animals);
         }
-        
     }
 }

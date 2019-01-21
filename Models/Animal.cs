@@ -1,10 +1,8 @@
-﻿using System.Runtime.Serialization;
-
-namespace ConsoleApp4.Models
+﻿namespace WebApiServerConsole.Models
 {
-    public class AnimalDto
+    public class Animal
     {
-        public AnimalDto(string name)
+        public Animal(string name)
         {
             Name = name;
         }

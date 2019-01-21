@@ -4,7 +4,7 @@ using System.Web.Http.Cors;
 using Newtonsoft.Json.Serialization;
 using Owin;
 
-namespace ConsoleApp4
+namespace WebApiServerConsole
 {
     public class StartUp
     {
