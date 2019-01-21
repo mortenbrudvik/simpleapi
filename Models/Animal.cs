@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace ConsoleApp4
+namespace ConsoleApp4.Models
 {
     [DataContract(Name = "animal")]
     public class AnimalDto

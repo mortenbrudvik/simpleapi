@@ -1,4 +1,5 @@
 ﻿using System.Web.Http;
+using System.Web.Http.Cors;
 using Owin;
 
 namespace ConsoleApp4
@@ -11,11 +12,10 @@ namespace ConsoleApp4
 
             config.MapHttpAttributeRoutes();
 
-            config.Routes.MapHttpRoute(
-                name: "SimpleApi",
-                routeTemplate: "simpleapi/{controller}/{id}",
-                defaults: new {id = RouteParameter.Optional}
-            );
+            var attr = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(attr);
+
+            config.Routes.MapHttpRoute("SimpleApi", "simpleapi/{controller}/{id}", new {id = RouteParameter.Optional});
             app.UseWebApi(config);
         }
     }
