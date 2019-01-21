@@ -3,6 +3,10 @@ using System.Web.Http;
 using System.Web.Http.Cors;
 using Newtonsoft.Json.Serialization;
 using Owin;
+using Unity;
+using Unity.WebApi;
+using WebApiServerConsole.Middleware;
+using WebApiServerConsole.Services;
 
 namespace WebApiServerConsole
 {
@@ -12,16 +16,29 @@ namespace WebApiServerConsole
         {
             var config = new HttpConfiguration();
 
-            config.MapHttpAttributeRoutes();
-
+            // DI - Register services
+            var container = new UnityContainer();
+            var serviceFactory = new ServiceFactory();
+            var loggerService = serviceFactory.CreateLogger();
+            container.RegisterInstance(loggerService);
+            config.DependencyResolver = new UnityDependencyResolver(container);
+            
+            // Cors
             var attr = new EnableCorsAttribute("*", "*", "*");
             config.EnableCors(attr);
 
+            // Enable Json formatting - CamelCase
             config.Formatters.Clear();
             config.Formatters.Add(new JsonMediaTypeFormatter());
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
+            // Routes setup
+            config.MapHttpAttributeRoutes();
             config.Routes.MapHttpRoute("SimpleApi", "api/{controller}/{id}", new {id = RouteParameter.Optional});
+
+            // Middleware
+            app.Use<RequestLoggingMiddleware>(loggerService);
+
             app.UseWebApi(config);
         }
     }
