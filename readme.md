@@ -6,3 +6,4 @@ Support the following
 * CORS
 * Request logging 
 * Json data response - CamelCase
+* Swagger

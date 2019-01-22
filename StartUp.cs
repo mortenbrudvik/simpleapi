@@ -1,10 +1,10 @@
 ﻿using System.Net.Http.Formatting;
-using System.Security.Permissions;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.ExceptionHandling;
 using Newtonsoft.Json.Serialization;
 using Owin;
+using Swashbuckle.Application;
 using Unity;
 using Unity.WebApi;
 using WebApiServerConsole.Middleware;
@@ -38,6 +38,10 @@ namespace WebApiServerConsole
             config.MapHttpAttributeRoutes();
             config.Routes.MapHttpRoute("SimpleApi", "api/{controller}/{id}", new {id = RouteParameter.Optional});
             
+            // Swagger support - Swashbuckle
+            config.EnableSwagger(c => c.SingleApiVersion("v1", "Simple API by Morten Brudvik"))
+                .EnableSwaggerUi();
+
             // Middleware
             app.Use<RequestLoggingMiddleware>(loggerService);
             config.Services.Replace(typeof(IExceptionHandler), new GlobalExceptionHandler(loggerService)); // Catches unhandled exceptions.
